@@ -4,7 +4,8 @@
     "start": "babel-node lib/index.js",
     "build": "rm -rf ./build && babel lib -d build",
     "generate-schema": "babel-node bin/generate-schema",
-    "heroku-postbuild": "NODE_ENV=development npm i --quiet && NODE_ENV=production npm run build && npm prune --production"
+    "heroku-prebuild": "npm install --only=dev",
+    "heroku-postbuild": "npm run build && npm prune --production"
   },
   "dependencies": {
     "apollo-errors": "^1.5.1",
