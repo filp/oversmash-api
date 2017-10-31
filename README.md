@@ -41,6 +41,26 @@ docker build -t oversmash-api .
 docker run -p 3000:3000 -t -i oversmash-api
 ```
 
+### Configuration
+
+`oversmash-api` runs out of the box without requiring custom configuration. To customize it, you can:
+
+- Set `NODE_CONFIG` to a JSON string with the configuration values you want to customize (see [`config/default.yml.example`](/config/default.yml.example) for the available options)
+- Copy `config/default.yml.example` to `config/default.yml` and edit at your leisure.
+
+Uses [node-config](https://github.com/lorenwest/node-config), which supports a bunch more options.
+
+### Building for production
+
+`oversmash-api` uses some newer language features such as `async/await`. In order to run it out of the box with your version of nodejs, you will probably need to first build it:
+
+```shell
+$ npm i # Ensure you have devDependencies installed
+$ npm run build
+$ npm prune --production # Optional: remove devDependencies, you no longer need them
+$ node build/index.js # Start oversmash-api from the newly built build/index.js file
+```
+
 ### Endpoints:
 
 `oversmash-api` exposes two endpoints:
