@@ -1,0 +1,6 @@
+{
+  "name": "overwatch-api",
+  "description": "GraphQL API for Overwatch player information and stats Edit",
+  "repository": "https://github.com/filp/oversmash-api",
+  "keywords": ["node", "express", "graphql", "overwatch", "gaming"]
+}
