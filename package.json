@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "babel-node lib/index.js",
+    "build": "rm -rf ./build && babel lib -d build",
+    "generate-schema": "babel-node bin/generate-schema"
+  },
+  "dependencies": {
+    "apollo-errors": "^1.5.1",
+    "apollo-server-express": "^1.2.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "bunyan": "^1.8.12",
+    "bunyan-request": "^1.2.0",
+    "config": "^1.27.0",
+    "deepmerge": "^2.0.0",
+    "express": "^4.16.2",
+    "express-rate-limit": "^2.9.0",
+    "graphql": "^0.11.7",
+    "graphql-tools": "^2.6.1",
+    "lru-cache": "^4.1.1",
+    "oversmash": "^1.2.5",
+    "uppercamelcase": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-node6": "^11.0.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "eslint": "^4.10.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}

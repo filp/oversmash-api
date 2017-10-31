@@ -1,0 +1,15 @@
+http:
+  port: 3000
+  # Passed-through to express-rate-limit. Remove this section to disable
+  # rate limiting
+  rateLimit:
+    windowMs: 900000 # 15 minutes in ms
+    max: 15 # Max requests per IP per every windowMs
+    delayMs: 0 # Delay all requests by X amount
+    headers: true # Return rate-limit information headers
+
+oversmash:
+  schemaFile: 'schema.graphql'
+  cache:
+    max: 600 # 600 total records, profile AND stats
+    maxAge: 86400000 # 1 day
