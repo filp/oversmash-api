@@ -17,6 +17,18 @@ Features:
 
 See [`docs/example.md`](/docs/example.md)
 
+### Running oversmash-api
+
+`oversmash-api` ships with a `Dockerfile`. If you have docker installed, you can start it with the following command:
+
+```shell
+# Build the docker image (only need to do this once, or when you make changes):
+docker build -t oversmash-api .
+
+# Run it in the foreground, exposing the default port:
+docker run -p 3000:3000 -t -i oversmash-api
+```
+
 ### Endpoints:
 
 `oversmash-api` exposes two endpoints:
@@ -36,4 +48,4 @@ $ npm run generate-schema
 
 See [`LICENSE.md`](/LICENSE.md) for license information
 
-Contributions are welcome! See [`CONTRIBUTING.MD`](/CONTRIBUTING.MD)` for information.
+Contributions are welcome! See [`CONTRIBUTING.MD`](/CONTRIBUTING.md) for information.
