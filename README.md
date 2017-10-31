@@ -67,6 +67,7 @@ $ node build/index.js # Start oversmash-api from the newly built build/index.js 
 
 - `POST /graphql` - Standard GraphQL endpoint
 - `GET /health` - Returns `200 OK` as long as oversmash is running
+- `GET /` - Returns `200 OK` and a list of available routes
 
 ### Updating the schema
 
