@@ -23,7 +23,7 @@ You can query it, for example, using [graphiql-app](https://github.com/skevy/gra
 
 ![](/graphiql.png)
 
-*Note: Hosted on Heroku's free tier, so the first request may be extra slow as the application wakes up. Rate limits apply: 15 requests every 15 minutes per IP address*
+*Note: Hosted on Heroku's free tier, so the first request may be extra slow as the application wakes up.*
 
 ### Example query and response:
 
