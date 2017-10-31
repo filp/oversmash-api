@@ -15,9 +15,9 @@ Features:
 - Detailed request and operation logging
 - Backed by [oversmash](https://github.com/filp/oversmash), including automated efficient scraping of all hero stats
 
-### Sample application
+### Reference deployment
 
-An oversmash-api sample application is available at https://oversmash-api-sample.herokuapp.com
+An oversmash-api reference deployment is available at https://oversmash.com
 
 You can query it, for example, using [graphiql-app](https://github.com/skevy/graphiql-app):
 
