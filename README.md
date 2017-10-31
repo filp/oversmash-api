@@ -6,10 +6,7 @@ Query player information, achievements and stats for the [Overwatch](https://pla
 
 Features:
 
-- Full static schema available, which when used with a compatible tool gives you full type information and suggestions (e.g, in GraphiQl):
-
-    ![](/docs/suggestions.png)
-
+- Full static schema available, which when used with a compatible tool gives you full type information and suggestions (e.g in GraphiQL)
 - Configurable rate limiting support
 - Proper GraphQL errors
 - In-memory LRU cache for player information
