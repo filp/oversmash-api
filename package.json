@@ -3,7 +3,8 @@
   "scripts": {
     "start": "babel-node lib/index.js",
     "build": "rm -rf ./build && babel lib -d build",
-    "generate-schema": "babel-node bin/generate-schema"
+    "generate-schema": "babel-node bin/generate-schema",
+    "heroku-postbuild": "npm i --quiet && NODE_ENV=production npm run build && npm prune --production"
   },
   "dependencies": {
     "apollo-errors": "^1.5.1",
