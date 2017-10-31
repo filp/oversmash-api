@@ -1,5 +1,7 @@
 # oversmash-api
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 Production-ready (ish!!) GraphQL API implementation backed by [oversmash](https://github.com/filp/oversmash).
 
 Query player information, achievements and stats for the [Overwatch](https://playoverwatch.com/en-us/) game. Includes auto-generated, complete type information for all available stats (e.g "what's the average healing as Ana for this player, in competitive mode")
@@ -12,6 +14,16 @@ Features:
 - In-memory LRU cache for player information
 - Detailed request and operation logging
 - Backed by [oversmash](https://github.com/filp/oversmash), including automated efficient scraping of all hero stats
+
+### Sample application
+
+An oversmash-api sample application is available at https://oversmash-api-sample.herokuapp.com
+
+You can query it, for example, using [graphiql-app](https://github.com/skevy/graphiql-app):
+
+![](grapiql.png)
+
+*Note: Hosted on Heroku's free tier, so the first request may be extra slow as the application wakes up. Rate limits apply: 15 requests every 15 minutes per IP address*
 
 ### Example query and response:
 
