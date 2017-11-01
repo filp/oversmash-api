@@ -25,6 +25,7 @@ type PlayerAccount {
 }
 
 type Player {
+  name: String!
   accounts: [PlayerAccount!]!
   account(region: String!, platform: String!): PlayerAccount
 }
