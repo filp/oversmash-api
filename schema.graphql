@@ -37,7 +37,7 @@ type Query {
 
     # == The following types are auto-generated ==
 
-    union HeroStats = AllStats | TracerStats | WidowmakerStats | GenjiStats | MccreeStats | ReaperStats | MercyStats | HanzoStats | TorbjornStats | ReinhardtStats | PharahStats | WinstonStats | BastionStats | SymmetraStats | ZenyattaStats | RoadhogStats | JunkratStats | ZaryaStats | Soldier76Stats | LucioStats | DvaStats | MeiStats | AnaStats | OrisaStats | DoomfistStats
+    union HeroStats = AllStats | TracerStats | WidowmakerStats | GenjiStats | MccreeStats | ReaperStats | MercyStats | HanzoStats | TorbjornStats | ReinhardtStats | PharahStats | WinstonStats | BastionStats | SymmetraStats | ZenyattaStats | RoadhogStats | JunkratStats | ZaryaStats | Soldier76Stats | LucioStats | DvaStats | MeiStats | AnaStats | OrisaStats | SombraStats | DoomfistStats | MoiraStats
     type GamemodeStats {
       all: AllStats
 tracer: TracerStats
@@ -63,15 +63,22 @@ dva: DvaStats
 mei: MeiStats
 ana: AnaStats
 orisa: OrisaStats
+sombra: SombraStats
 doomfist: DoomfistStats
+moira: MoiraStats
     }
 
     
         # == all types ==
 
         
-type AllCombatStats { meleeFinalBlows: Int!
+type AllCombatStats { barrierDamageDone: Int!
+    meleeFinalBlows: Int!
+    deaths: Int!
+    heroDamageDone: Int!
+    timeSpentOnFire: String!
     soloKills: Int!
+    objectiveTime: String!
     objectiveKills: Int!
     finalBlows: Int!
     eliminations: Int!
@@ -80,6 +87,9 @@ type AllCombatStats { meleeFinalBlows: Int!
     multikills: Int! }
 type AllAssistsStats { healingDone: Int!
     reconAssists: Int!
+    offensiveAssists: Int!
+    defensiveAssists: Int!
+    teleporterPadsDestroyed: Int!
     teleporterPadDestroyed: Int! }
 type AllBestStats { eliminationsMostInGame: Int!
     finalBlowsMostInGame: Int!
@@ -91,30 +101,21 @@ type AllBestStats { eliminationsMostInGame: Int!
     objectiveTimeMostInGame: String!
     multikillBest: Int!
     soloKillsMostInGame: Int!
-    timeSpentOnFireMostInGame: String! }
-type AllAverageStats { allDamageDoneAvgPer10Min: Int! }
-type AllDeathsStats { deaths: Int! }
-type AllAwardsStats { cards: Int!
-    medals: Int!
-    medalsGold: Int!
-    medalsSilver: Int!
-    medalsBronze: Int! }
-type AllGameStats { timePlayed: Int!
-    timeSpentOnFire: String!
-    objectiveTime: String!
-    gamesPlayed: Int!
-    gamesWon: Int! }
-type AllMiscStats { meleeFinalBlowsMostInGame: Int!
+    timeSpentOnFireMostInGame: String!
+    meleeFinalBlowsMostInGame: Int!
+    shieldGeneratorDestroyedMostInGame: Int!
     turretsDestroyedMostInGame: Int!
     environmentalKillsMostInGame: Int!
-    teleporterPadDestroyedMostInGame: Int!
     killStreakBest: Int!
     heroDamageDoneMostInGame: Int!
-    overwatchGuid0x086000000000052A: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int!
+    reconAssistsMostInGame: Int!
+    shieldGeneratorsDestroyedMostInGame: Int!
+    teleporterPadsDestroyedMostInGame: Int!
+    teleporterPadDestroyedMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type AllAverageStats { barrierDamageDoneAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    heroDamageDone: Int!
     heroDamageDoneAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
@@ -123,20 +124,26 @@ type AllMiscStats { meleeFinalBlowsMostInGame: Int!
     healingDoneAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
-    turretsDestroyed: Int!
+    allDamageDoneAvgPer10Min: Int! }
+type AllAwardsStats { cards: Int!
+    medals: Int!
+    medalsGold: Int!
+    medalsSilver: Int!
+    medalsBronze: Int! }
+type AllGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
     gamesTied: Int!
-    gamesLost: Int!
-    reconAssistsMostInGame: Int!
-    offensiveAssists: Int!
-    defensiveAssists: Int!
-    environmentalKillMostInGame: Int! }
+    gamesLost: Int! }
+type AllMiscStats { shieldGeneratorDestroyed: Int!
+    turretsDestroyed: Int!
+    shieldGeneratorsDestroyed: Int! }
         type AllStats {
           
   combat: AllCombatStats
   assists: AllAssistsStats
   best: AllBestStats
   average: AllAverageStats
-  deaths: AllDeathsStats
   awards: AllAwardsStats
   game: AllGameStats
   misc: AllMiscStats
@@ -150,21 +157,33 @@ type TracerHeroStats { pulseBombKills: Int!
     pulseBombKillsMostInGame: Int!
     pulseBombsAttachedMostInGame: Int!
     pulseBombsAttached: Int!
-    meleeFinalBlowsMostInGame: Int! }
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    healthRecovered: Int!
+    healthRecoveredMostInGame: Int!
+    pulseBombsAttachedAvgPer10Min: Int!
+    pulseBombKillsAvgPer10Min: Int!
+    healthRecoveredAvgPer10Min: Int!
+    selfHealingAvgPer10Min: Int! }
 type TracerCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
     multikills: Int!
     meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type TracerAssistsStats { teleporterPadDestroyed: Int!
-    turretsDestroyed: Int!
-    selfHealing: Int! }
+    weaponAccuracy: Int!
+    multikill: Int! }
+type TracerAssistsStats { turretsDestroyed: Int!
+    teleporterPadDestroyed: Int! }
 type TracerBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -174,38 +193,16 @@ type TracerBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
+    multikillBest: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type TracerAverageStats { allDamageDoneAvgPer10Min: Float! }
-type TracerDeathsStats { deaths: Int! }
-type TracerAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type TracerGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type TracerMiscStats { multikillBest: Int!
-    gamesTied: Int!
-    healthRecovered: Int!
-    healthRecoveredMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    pulseBombsAttachedAvgPer10Min: Int!
-    pulseBombKillsAvgPer10Min: Int!
-    healthRecoveredAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int! }
+type TracerAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
@@ -216,7 +213,21 @@ type TracerMiscStats { multikillBest: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type TracerAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type TracerGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+type TracerMiscStats { shieldGeneratorDestroyed: Int!
+    shieldGeneratorsDestroyed: Int! }
         type TracerStats {
           
   hero: TracerHeroStats
@@ -224,7 +235,6 @@ type TracerMiscStats { multikillBest: Int!
   assists: TracerAssistsStats
   best: TracerBestStats
   average: TracerAverageStats
-  deaths: TracerDeathsStats
   awards: TracerAwardsStats
   game: TracerGameStats
   misc: TracerMiscStats
@@ -237,21 +247,36 @@ type TracerMiscStats { multikillBest: Int!
 type WidowmakerHeroStats { venomMineKills: Int!
     scopedCriticalHits: Int!
     scopedCriticalHitsMostInGame: Int!
-    venomMineKillMostInGame: Int!
-    reconAssistsMostInGame: Int!
+    venomMineKillsMostInGame: Int!
     scopedAccuracyBestInGame: Int!
-    meleeFinalBlowMostInGame: Int!
-    scopedAccuracy: Int! }
+    venomMineKillsAvgPer10Min: Int!
+    scopedCriticalHitsAvgPer10Min: Int!
+    scopedAccuracy: Int!
+    venomMineKill: Int!
+    venomMineKillMostInGame: Int! }
 type WidowmakerCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
+    multikills: Int!
     meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
+    weaponAccuracy: Int!
+    meleeFinalBlow: Int!
+    objectiveKill: Int!
+    multikill: Int! }
+type WidowmakerAssistsStats { reconAssists: Int!
+    reconAssistsMostInGame: Int!
+    turretsDestroyed: Int!
+    reconAssistsAvgPer10Min: Int! }
 type WidowmakerBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -261,33 +286,17 @@ type WidowmakerBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
+    multikillBest: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type WidowmakerAverageStats { allDamageDoneAvgPer10Min: Float! }
-type WidowmakerDeathsStats { deaths: Int! }
-type WidowmakerAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    card: Int! }
-type WidowmakerGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type WidowmakerMiscStats { reconAssists: Int!
+    criticalHitsMostInLife: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    venomMineKillsAvgPer10Min: Int!
-    scopedCriticalHitsAvgPer10Min: Int!
-    reconAssistsAvgPer10Min: Int!
+    objectiveKillMostInGame: Int! }
+type WidowmakerAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
@@ -298,17 +307,29 @@ type WidowmakerMiscStats { reconAssists: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    eliminationPerLife: Int! }
+type WidowmakerAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type WidowmakerGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type WidowmakerStats {
           
   hero: WidowmakerHeroStats
   combat: WidowmakerCombatStats
+  assists: WidowmakerAssistsStats
   best: WidowmakerBestStats
   average: WidowmakerAverageStats
-  deaths: WidowmakerDeathsStats
   awards: WidowmakerAwardsStats
   game: WidowmakerGameStats
-  misc: WidowmakerMiscStats
         }
       
 
@@ -320,18 +341,25 @@ type GenjiHeroStats { dragonbladeKills: Int!
     damageReflected: Int!
     damageReflectedMostInGame: Int!
     dragonblades: Int!
-    meleeFinalBlowsMostInGame: Int! }
+    dragonbladeKillsAvgPer10Min: Int!
+    damageReflectedAvgPer10Min: Int! }
 type GenjiCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
     multikills: Int!
     meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
+    weaponAccuracy: Int!
+    multikill: Int! }
 type GenjiAssistsStats { turretsDestroyed: Int! }
 type GenjiBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
@@ -342,33 +370,19 @@ type GenjiBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
+    multikillBest: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type GenjiAverageStats { allDamageDoneAvgPer10Min: Float! }
-type GenjiDeathsStats { deaths: Int! }
-type GenjiAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type GenjiGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type GenjiMiscStats { multikillBest: Int!
+    criticalHitsMostInLife: Int!
+    meleeFinalBlowsMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
+    soloKillMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type GenjiAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
-    dragonbladeKillsAvgPer10Min: Int!
-    damageReflectedAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
@@ -378,7 +392,19 @@ type GenjiMiscStats { multikillBest: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type GenjiAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type GenjiGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type GenjiStats {
           
   hero: GenjiHeroStats
@@ -386,10 +412,8 @@ type GenjiMiscStats { multikillBest: Int!
   assists: GenjiAssistsStats
   best: GenjiBestStats
   average: GenjiAverageStats
-  deaths: GenjiDeathsStats
   awards: GenjiAwardsStats
   game: GenjiGameStats
-  misc: GenjiMiscStats
         }
       
 
@@ -399,20 +423,29 @@ type GenjiMiscStats { multikillBest: Int!
 type MccreeHeroStats { deadeyeKills: Int!
     deadeyeKillsMostInGame: Int!
     fanTheHammerKills: Int!
-    meleeFinalBlowsMostInGame: Int! }
+    fanTheHammerKillsMostInGame: Int!
+    fanTheHammerKillsAvgPer10Min: Int!
+    deadeyeKillsAvgPer10Min: Int! }
 type MccreeCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
     multikills: Int!
-    environmentalKill: Int!
     meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type MccreeAssistsStats { turretsDestroyed: Int! }
+    weaponAccuracy: Int!
+    meleeFinalBlow: Int!
+    multikill: Int! }
+type MccreeAssistsStats { turretsDestroyed: Int!
+    teleporterPadDestroyed: Int! }
 type MccreeBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -422,32 +455,16 @@ type MccreeBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
+    multikillBest: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type MccreeAverageStats { allDamageDoneAvgPer10Min: Float! }
-type MccreeDeathsStats { deaths: Int! }
-type MccreeAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type MccreeGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type MccreeMiscStats { multikillBest: Int!
-    fanTheHammerKillsMostInGame: Int!
-    gamesTied: Int!
+    criticalHitsMostInLife: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int! }
+type MccreeAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
@@ -457,10 +474,21 @@ type MccreeMiscStats { multikillBest: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    fanTheHammerKillsAvgPer10Min: Int!
-    deadeyeKillsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type MccreeAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int!
+    card: Int! }
+type MccreeGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type MccreeStats {
           
   hero: MccreeHeroStats
@@ -468,26 +496,110 @@ type MccreeMiscStats { multikillBest: Int!
   assists: MccreeAssistsStats
   best: MccreeBestStats
   average: MccreeAverageStats
-  deaths: MccreeDeathsStats
   awards: MccreeAwardsStats
   game: MccreeGameStats
-  misc: MccreeMiscStats
         }
       
 
         # == reaper types ==
 
         
-type ReaperCombatStats { eliminations: Int!
-    finalBlows: Int!
+type ReaperHeroStats { selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int! }
+type ReaperCombatStats { elimination: Int!
+    deaths: Int!
     allDamageDone: Int!
-    objectiveKill: Int!
     criticalHits: Int!
+    heroDamageDone: Int!
     criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
+    eliminations: Int!
+    death: Int!
+    objectiveTime: String! }
+type ReaperBestStats { eliminationMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationMostInGame: Int!
+    criticalHitsMostInGame: Int!
+    criticalHitsMostInLife: Int!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int!
+    eliminationsMostInLife: Int!
+    eliminationsMostInGame: Int!
+    objectiveTimeMostInGame: String! }
+type ReaperAverageStats { criticalHitsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
     eliminationsPerLife: Int!
-    weaponAccuracy: Int! }
-type ReaperAssistsStats { selfHealing: Int! }
-type ReaperBestStats { eliminationsMostInLife: Int!
+    allDamageDoneAvgPer10Min: Float!
+    objectiveTimeAvgPer10Min: Int! }
+type ReaperAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int! }
+type ReaperGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+        type ReaperStats {
+          
+  hero: ReaperHeroStats
+  combat: ReaperCombatStats
+  best: ReaperBestStats
+  average: ReaperAverageStats
+  awards: ReaperAwardsStats
+  game: ReaperGameStats
+        }
+      
+
+        # == mercy types ==
+
+        
+type MercyHeroStats { blasterKills: Int!
+    blasterKillsMostInGame: Int!
+    playersResurrected: Int!
+    playersResurrectedMostInGame: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    damageAmplified: Int!
+    damageAmplifiedMostInGame: Int!
+    selfHealingAvgPer10Min: Int!
+    damageAmplifiedAvgPer10Min: Int!
+    playersResurrectedAvgPer10Min: Int!
+    blasterKillsAvgPer10Min: Int! }
+type MercyCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    soloKills: Int!
+    allDamageDone: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    meleeFinalBlows: Int!
+    timeSpentOnFire: String!
+    criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
+    finalBlow: Int!
+    objectiveKill: Int! }
+type MercyAssistsStats { turretDestroyed: Int!
+    offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int! }
+type MercyBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
     killStreakBest: Int!
@@ -496,114 +608,42 @@ type ReaperBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillMostInGame: Int!
     objectiveTimeMostInGame: String!
+    soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type ReaperAverageStats { allDamageDoneAvgPer10Min: Float! }
-type ReaperDeathsStats { death: Int! }
-type ReaperAwardsStats { medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type ReaperGameStats { timePlayed: Float!
-    gamesPlayed: Int!
-    objectiveTime: String! }
-type ReaperMiscStats { heroDamageDone: Int!
-    heroDamageDoneMostInGame: Int!
-    heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    criticalHitsAvgPer10Min: Int!
-    objectiveTimeAvgPer10Min: Int!
-    objectiveKillsAvgPer10Min: Int!
-    finalBlowsAvgPer10Min: Int!
-    eliminationsAvgPer10Min: Int!
-    deathsAvgPer10Min: Int!
-    heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
-        type ReaperStats {
-          
-  combat: ReaperCombatStats
-  assists: ReaperAssistsStats
-  best: ReaperBestStats
-  average: ReaperAverageStats
-  deaths: ReaperDeathsStats
-  awards: ReaperAwardsStats
-  game: ReaperGameStats
-  misc: ReaperMiscStats
-        }
-      
-
-        # == mercy types ==
-
-        
-type MercyHeroStats { playersResurrected: Int!
-    playersResurrectedMostInGame: Int!
-    meleeFinalBlowMostInGame: Int! }
-type MercyCombatStats { elimination: Int!
-    finalBlow: Int!
-    soloKill: Int!
-    allDamageDone: Int!
-    meleeFinalBlow: Int!
-    criticalHits: Int!
-    criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type MercyAssistsStats { offensiveAssists: Int!
-    selfHealing: Int! }
-type MercyBestStats { eliminationMostInLife: Int!
-    allDamageDoneMostInLife: Int!
-    weaponAccuracyBestInGame: Int!
-    killStreakBest: Int!
-    allDamageDoneMostInGame: Int!
-    eliminationMostInGame: Int!
-    finalBlowMostInGame: Int!
-    objectiveTimeMostInGame: String!
-    soloKillMostInGame: Int!
-    offensiveAssistsMostInGame: Int!
-    criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type MercyAverageStats { allDamageDoneAvgPer10Min: Float! }
-type MercyDeathsStats { deaths: Int! }
-type MercyAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medals: Int!
-    card: Int! }
-type MercyGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String! }
-type MercyMiscStats { blasterKill: Int!
-    blasterKillMostInGame: Int!
-    defensiveAssists: Int!
-    defensiveAssistsMostInGame: Int!
-    healingDone: Int!
-    healingDoneMostInGame: Int!
-    damageAmplified: Int!
-    damageAmplifiedMostInGame: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    selfHealingAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    healingDoneAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
-    damageAmplifiedAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int!
+    eliminationMostInLife: Int!
+    finalBlowMostInGame: Int!
+    criticalHitMostInLife: Int!
+    objectiveKillsMostInGame: Int! }
+type MercyAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
     meleeFinalBlowsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    playersResurrectedAvgPer10Min: Int!
-    blasterKillsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type MercyAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type MercyGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type MercyStats {
           
   hero: MercyHeroStats
@@ -611,10 +651,8 @@ type MercyMiscStats { blasterKill: Int!
   assists: MercyAssistsStats
   best: MercyBestStats
   average: MercyAverageStats
-  deaths: MercyDeathsStats
   awards: MercyAwardsStats
   game: MercyGameStats
-  misc: MercyMiscStats
         }
       
 
@@ -625,102 +663,30 @@ type HanzoHeroStats { dragonstrikeKills: Int!
     dragonstrikeKillsMostInGame: Int!
     scatterArrowKills: Int!
     scatterArrowKillsMostInGame: Int!
-    reconAssistsMostInGame: Int!
-    meleeFinalBlowMostInGame: Int! }
+    scatterArrowKillsAvgPer10Min: Int!
+    dragonstrikeKillsAvgPer10Min: Int! }
 type HanzoCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
-    multikills: Int!
-    meleeFinalBlows: Int!
-    criticalHits: Int!
-    criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type HanzoBestStats { eliminationsMostInLife: Int!
-    allDamageDoneMostInLife: Int!
-    weaponAccuracyBestInGame: Int!
-    killStreakBest: Int!
-    allDamageDoneMostInGame: Int!
-    eliminationsMostInGame: Int!
-    finalBlowsMostInGame: Int!
-    objectiveKillsMostInGame: Int!
-    objectiveTimeMostInGame: String!
-    soloKillsMostInGame: Int!
-    criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type HanzoAverageStats { allDamageDoneAvgPer10Min: Float! }
-type HanzoDeathsStats { deaths: Int! }
-type HanzoAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type HanzoGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
     objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type HanzoMiscStats { reconAssists: Int!
-    multikillBest: Int!
-    timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
-    heroDamageDoneMostInGame: Int!
-    heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    reconAssistsAvgPer10Min: Int!
-    criticalHitsAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
-    soloKillsAvgPer10Min: Int!
-    objectiveTimeAvgPer10Min: Int!
-    objectiveKillsAvgPer10Min: Int!
-    meleeFinalBlowsAvgPer10Min: Int!
-    finalBlowsAvgPer10Min: Int!
-    eliminationsAvgPer10Min: Int!
-    deathsAvgPer10Min: Int!
-    scatterArrowKillsAvgPer10Min: Int!
-    dragonstrikeKillsAvgPer10Min: Int!
-    heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
-        type HanzoStats {
-          
-  hero: HanzoHeroStats
-  combat: HanzoCombatStats
-  best: HanzoBestStats
-  average: HanzoAverageStats
-  deaths: HanzoDeathsStats
-  awards: HanzoAwardsStats
-  game: HanzoGameStats
-  misc: HanzoMiscStats
-        }
-      
-
-        # == torbjorn types ==
-
-        
-type TorbjornHeroStats { armorPacksCreated: Int!
-    torbjornKills: Int!
-    turretKills: Int!
-    torbjornKillsMostInGame: Int!
-    moltenCoreKills: Int!
-    moltenCoreKillsMostInGame: Int!
-    meleeFinalBlowMostInGame: Int! }
-type TorbjornCombatStats { eliminations: Int!
-    finalBlows: Int!
-    soloKill: Int!
-    allDamageDone: Int!
-    objectiveKills: Int!
-    multikill: Int!
     meleeFinalBlow: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Int!
     weaponAccuracy: Int! }
-type TorbjornBestStats { eliminationsMostInLife: Int!
+type HanzoAssistsStats { reconAssists: Int!
+    reconAssistsMostInGame: Int!
+    reconAssistsAvgPer10Min: Int!
+    reconAssist: Int!
+    reconAssistMostInGame: Int!
+    turretDestroyed: Int! }
+type HanzoBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
     killStreakBest: Int!
@@ -731,32 +697,14 @@ type TorbjornBestStats { eliminationsMostInLife: Int!
     objectiveTimeMostInGame: String!
     soloKillMostInGame: Int!
     criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type TorbjornAverageStats { allDamageDoneAvgPer10Min: Float! }
-type TorbjornDeathsStats { deaths: Int! }
-type TorbjornAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type TorbjornGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String! }
-type TorbjornMiscStats { armorPacksCreatedMostInGame: Int!
-    turretKillsMostInGame: Int!
-    multikillBest: Int!
+    criticalHitsMostInLife: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int! }
+type HanzoAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
-    turretKillsAvgPer10Min: Int!
-    torbjornKillsAvgPer10Min: Int!
-    moltenCoreKillsAvgPer10Min: Int!
-    armorPacksCreatedAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
@@ -766,17 +714,111 @@ type TorbjornMiscStats { armorPacksCreatedMostInGame: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Int!
+    allDamageDoneAvgPer10Min: Float!
+    eliminationPerLife: Int! }
+type HanzoAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int! }
+type HanzoGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+        type HanzoStats {
+          
+  hero: HanzoHeroStats
+  combat: HanzoCombatStats
+  assists: HanzoAssistsStats
+  best: HanzoBestStats
+  average: HanzoAverageStats
+  awards: HanzoAwardsStats
+  game: HanzoGameStats
+        }
+      
+
+        # == torbjorn types ==
+
+        
+type TorbjornHeroStats { armorPacksCreated: Int!
+    torbjornKills: Int!
+    turretKills: Int!
+    torbjornKillsMostInGame: Int!
+    armorPacksCreatedMostInGame: Int!
+    turretKillsMostInGame: Int!
+    moltenCoreKills: Int!
+    moltenCoreKillsMostInGame: Int!
+    turretKillsAvgPer10Min: Int!
+    torbjornKillsAvgPer10Min: Int!
+    moltenCoreKillsAvgPer10Min: Int!
+    armorPacksCreatedAvgPer10Min: Int! }
+type TorbjornCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    soloKills: Int!
+    allDamageDone: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    multikills: Int!
+    timeSpentOnFire: String!
+    criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
+    meleeFinalBlow: Int! }
+type TorbjornBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    multikillBest: Int!
+    soloKillsMostInGame: Int!
+    criticalHitsMostInGame: Int!
+    criticalHitsMostInLife: Int!
+    timeSpentOnFireMostInGame: Int!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int!
+    barrierDamageDoneMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type TorbjornAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    criticalHitsAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    meleeFinalBlowsAvgPer10Min: Int! }
+type TorbjornAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type TorbjornGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type TorbjornStats {
           
   hero: TorbjornHeroStats
   combat: TorbjornCombatStats
   best: TorbjornBestStats
   average: TorbjornAverageStats
-  deaths: TorbjornDeathsStats
   awards: TorbjornAwardsStats
   game: TorbjornGameStats
-  misc: TorbjornMiscStats
         }
       
 
@@ -785,55 +827,76 @@ type TorbjornMiscStats { armorPacksCreatedMostInGame: Int!
         
 type ReinhardtHeroStats { damageBlocked: Int!
     damageBlockedMostInGame: Int!
-    chargeKill: Int!
-    chargeKillMostInGame: Int!
+    chargeKills: Int!
+    chargeKillsMostInGame: Int!
+    fireStrikeKill: Int!
+    fireStrikeKillMostInGame: Int!
+    earthshatterKills: Int!
+    earthshatterKillsMostInGame: Int!
+    rocketHammerMeleeAccuracy: Int!
+    fireStrikeKillsAvgPer10Min: Int!
+    earthshatterKillsAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int!
+    chargeKillsAvgPer10Min: Int!
     fireStrikeKills: Int!
     fireStrikeKillsMostInGame: Int!
-    earthshatterKills: Int!
-    earthshatterKillsMostInGame: Int! }
+    chargeKill: Int!
+    chargeKillMostInGame: Int!
+    earthshatterKill: Int!
+    earthshatterKillMostInGame: Int! }
 type ReinhardtCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     allDamageDone: Int!
-    multikill: Int! }
-type ReinhardtAssistsStats { offensiveAssist: Int! }
+    objectiveKills: Int!
+    objectiveTime: String!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    soloKills: Int!
+    multikill: Int!
+    finalBlow: Int! }
+type ReinhardtAssistsStats { offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    offensiveAssist: Int!
+    offensiveAssistMostInGame: Int! }
 type ReinhardtBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     killStreakBest: Int!
     allDamageDoneMostInGame: Int!
     eliminationsMostInGame: Int!
     finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
-    offensiveAssistMostInGame: Int! }
-type ReinhardtAverageStats { allDamageDoneAvgPer10Min: Float! }
+    timeSpentOnFireMostInGame: Int!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int!
+    barrierDamageDoneMostInGame: Int!
+    multikillBest: Int!
+    soloKillsMostInGame: Int!
+    finalBlowMostInGame: Int! }
+type ReinhardtAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    soloKillsAvgPer10Min: Int! }
 type ReinhardtAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
     medalsGold: Int!
     medals: Int!
     card: Int! }
 type ReinhardtGameStats { timePlayed: Int!
     gamesPlayed: Int!
     gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
+    gamesLost: Int!
     winPercentage: Int! }
-type ReinhardtMiscStats { multikillBest: Int!
-    timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
-    heroDamageDoneMostInGame: Int!
-    heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    fireStrikeKillsAvgPer10Min: Int!
-    earthshatterKillsAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
-    chargeKillsAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
-    objectiveTimeAvgPer10Min: Int!
-    finalBlowsAvgPer10Min: Int!
-    eliminationsAvgPer10Min: Int!
-    heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
         type ReinhardtStats {
           
   hero: ReinhardtHeroStats
@@ -843,7 +906,6 @@ type ReinhardtMiscStats { multikillBest: Int!
   average: ReinhardtAverageStats
   awards: ReinhardtAwardsStats
   game: ReinhardtGameStats
-  misc: ReinhardtMiscStats
         }
       
 
@@ -854,19 +916,23 @@ type PharahHeroStats { rocketDirectHits: Int!
     barrageKills: Int!
     rocketDirectHitsMostInGame: Int!
     barrageKillsMostInGame: Int!
-    meleeFinalBlowMostInGame: Int! }
+    rocketDirectHitsAvgPer10Min: Int!
+    barrageKillsAvgPer10Min: Int! }
 type PharahCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
-    multikills: Int!
+    objectiveTime: String!
     environmentalKills: Int!
-    meleeFinalBlow: Int!
-    eliminationsPerLife: Float!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     weaponAccuracy: Int!
-    soloKill: Int!
-    multikill: Int! }
+    multikills: Int!
+    meleeFinalBlow: Int! }
 type PharahBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -877,51 +943,46 @@ type PharahBestStats { eliminationsMostInLife: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
     soloKillsMostInGame: Int!
-    objectiveKillMostInGame: Int!
-    soloKillMostInGame: Int! }
-type PharahAverageStats { allDamageDoneAvgPer10Min: Float! }
-type PharahDeathsStats { deaths: Int! }
-type PharahAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    card: Int! }
-type PharahGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type PharahMiscStats { multikillBest: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    rocketDirectHitsAvgPer10Min: Int!
-    barrageKillsAvgPer10Min: Int!
+    multikillBest: Int!
+    meleeFinalBlowMostInGame: Int! }
+type PharahAverageStats { barrierDamageDoneAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
-    meleeFinalBlowsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    meleeFinalBlowsAvgPer10Min: Int! }
+type PharahAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type PharahGameStats { timePlayed: Float!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int!
+    gamesTied: Int! }
+type PharahAssistsStats { teleporterPadDestroyed: Int!
+    turretsDestroyed: Int! }
         type PharahStats {
           
   hero: PharahHeroStats
   combat: PharahCombatStats
   best: PharahBestStats
   average: PharahAverageStats
-  deaths: PharahDeathsStats
   awards: PharahAwardsStats
   game: PharahGameStats
-  misc: PharahMiscStats
+  assists: PharahAssistsStats
         }
       
 
@@ -936,15 +997,31 @@ type WinstonHeroStats { playersKnockedBack: Int!
     meleeKillsMostInGame: Int!
     jumpPackKills: Int!
     jumpPackKillsMostInGame: Int!
-    meleeFinalBlowMostInGame: Int!
-    meleeFinalBlowsMostInGame: Int! }
+    primalRageKills: Int!
+    primalRageKillsMostInGame: Int!
+    primalRageMeleeAccuracy: Int!
+    teslaCannonAccuracy: Int!
+    primalRageKillsAvgPer10Min: Int!
+    playersKnockedBackAvgPer10Min: Int!
+    meleeKillsAvgPer10Min: Int!
+    jumpPackKillsAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int!
+    primalRageKillMostInGame: Int! }
 type WinstonCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
-    soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
-    meleeFinalBlows: Int!
-    eliminationsPerLife: Float! }
+    objectiveTime: String!
+    meleeFinalBlow: Int!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    soloKills: Int!
+    multikills: Int!
+    environmentalKills: Int!
+    meleeFinalBlows: Int! }
 type WinstonBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     killStreakBest: Int!
@@ -953,36 +1030,16 @@ type WinstonBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
-    soloKillsMostInGame: Int! }
-type WinstonAverageStats { allDamageDoneAvgPer10Min: Float! }
-type WinstonDeathsStats { deaths: Int! }
-type WinstonAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    card: Int! }
-type WinstonGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type WinstonMiscStats { primalRageKills: Int!
-    primalRageKillsMostInGame: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    primalRageKillsAvgPer10Min: Int!
-    playersKnockedBackAvgPer10Min: Int!
-    meleeKillsAvgPer10Min: Int!
-    jumpPackKillsAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
+    multikillBest: Int!
+    soloKillsMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int! }
+type WinstonAverageStats { barrierDamageDoneAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
-    soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
     meleeFinalBlowsAvgPer10Min: Int!
@@ -990,17 +1047,35 @@ type WinstonMiscStats { primalRageKills: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    soloKillsAvgPer10Min: Int! }
+type WinstonAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    card: Int!
+    cards: Int! }
+type WinstonGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int!
+    gamesTied: Int! }
+type WinstonMiscStats { weaponKills: Int!
+    meleeKills: Int!
+    jumpKills: Int! }
+type WinstonAssistsStats { turretsDestroyed: Int! }
         type WinstonStats {
           
   hero: WinstonHeroStats
   combat: WinstonCombatStats
   best: WinstonBestStats
   average: WinstonAverageStats
-  deaths: WinstonDeathsStats
   awards: WinstonAwardsStats
   game: WinstonGameStats
   misc: WinstonMiscStats
+  assists: WinstonAssistsStats
         }
       
 
@@ -1012,17 +1087,28 @@ type BastionHeroStats { reconKills: Int!
     tankKills: Int!
     sentryKillsMostInGame: Int!
     reconKillsMostInGame: Int!
-    tankKillsMostInGame: Int! }
+    tankKillsMostInGame: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int!
+    tankKillsAvgPer10Min: Int!
+    sentryKillsAvgPer10Min: Int!
+    reconKillsAvgPer10Min: Int! }
 type BastionCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
+    meleeFinalBlow: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
     weaponAccuracy: Int! }
-type BastionAssistsStats { selfHealing: Int! }
 type BastionBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1035,132 +1121,121 @@ type BastionBestStats { eliminationsMostInLife: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type BastionAverageStats { allDamageDoneAvgPer10Min: Float! }
-type BastionDeathsStats { deaths: Int! }
-type BastionAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type BastionGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    winPercentage: Int! }
-type BastionMiscStats { gamesTied: Int!
-    heroDamageDone: Int!
+    meleeFinalBlowMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int! }
+type BastionAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
-    tankKillsAvgPer10Min: Int!
-    sentryKillsAvgPer10Min: Int!
-    reconKillsAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
+    meleeFinalBlowsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type BastionAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    card: Int! }
+type BastionGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int!
+    gamesTied: Int! }
         type BastionStats {
           
   hero: BastionHeroStats
   combat: BastionCombatStats
-  assists: BastionAssistsStats
   best: BastionBestStats
   average: BastionAverageStats
-  deaths: BastionDeathsStats
   awards: BastionAwardsStats
   game: BastionGameStats
-  misc: BastionMiscStats
         }
       
 
         # == symmetra types ==
 
         
-type SymmetraHeroStats { sentryTurretKills: Int!
-    sentryTurretKillsMostInGame: Int!
-    playersTeleported: Int!
-    playersTeleportedMostInGame: Int!
-    teleporterUptime: Int!
-    teleporterUptimeBestInGame: Int!
-    teleporterUptimeAverage: Float! }
-type SymmetraCombatStats { eliminations: Int!
-    finalBlows: Int!
-    soloKills: Int!
+type SymmetraHeroStats { damageBlocked: Int!
+    damageBlockedMostInGame: Int!
+    damageBlockedAvgPer10Min: Int! }
+type SymmetraCombatStats { elimination: Int!
+    death: Int!
     allDamageDone: Int!
-    objectiveKills: Int!
-    multikills: Int!
-    eliminationsPerLife: Float! }
-type SymmetraAssistsStats { turretsDestroyed: Int! }
-type SymmetraBestStats { eliminationsMostInLife: Int!
+    heroDamageDone: Int! }
+type SymmetraBestStats { eliminationMostInLife: Int!
     allDamageDoneMostInLife: Int!
     killStreakBest: Int!
     allDamageDoneMostInGame: Int!
-    eliminationsMostInGame: Int!
-    finalBlowsMostInGame: Int!
-    objectiveKillsMostInGame: Int!
-    objectiveTimeMostInGame: String!
-    soloKillsMostInGame: Int! }
-type SymmetraAverageStats { allDamageDoneAvgPer10Min: Float! }
-type SymmetraDeathsStats { deaths: Int! }
-type SymmetraAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
+    eliminationMostInGame: Int!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int! }
+type SymmetraAverageStats { eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
+    eliminationPerLife: Int!
+    allDamageDoneAvgPer10Min: Float! }
+type SymmetraAwardsStats { medalsSilver: Int!
     medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type SymmetraGameStats { timePlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String! }
-type SymmetraMiscStats { multikillBest: Int!
-    damageBlocked: Int!
-    damageBlockedMostInGame: Int!
-    sentryTurretKillsAvgPer10Min: Int!
-    playersTeleportedAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
-    soloKillsAvgPer10Min: Int!
-    objectiveTimeAvgPer10Min: Int!
-    objectiveKillsAvgPer10Min: Int!
-    finalBlowsAvgPer10Min: Int!
-    eliminationsAvgPer10Min: Int!
-    deathsAvgPer10Min: Int! }
+    medals: Int! }
+type SymmetraGameStats { timePlayed: Float!
+    gamesPlayed: Int!
+    gamesLost: Int! }
         type SymmetraStats {
           
   hero: SymmetraHeroStats
   combat: SymmetraCombatStats
-  assists: SymmetraAssistsStats
   best: SymmetraBestStats
   average: SymmetraAverageStats
-  deaths: SymmetraDeathsStats
   awards: SymmetraAwardsStats
   game: SymmetraGameStats
-  misc: SymmetraMiscStats
         }
       
 
         # == zenyatta types ==
 
         
-type ZenyattaHeroStats { transcendenceHealingBest: Int! }
+type ZenyattaHeroStats { transcendenceHealingBest: Int!
+    transcendenceHealing: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int! }
 type ZenyattaCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
+    soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
+    meleeFinalBlow: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
     weaponAccuracy: Int!
-    soloKills: Int! }
+    multikill: Int!
+    meleeFinalBlows: Int!
+    multikills: Int! }
 type ZenyattaAssistsStats { offensiveAssists: Int!
-    selfHealing: Int! }
+    offensiveAssistsMostInGame: Int!
+    defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int!
+    turretsDestroyed: Int! }
 type ZenyattaBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1170,49 +1245,40 @@ type ZenyattaBestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
-    offensiveAssistsMostInGame: Int!
+    soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int!
-    soloKillsMostInGame: Int! }
-type ZenyattaAverageStats { allDamageDoneAvgPer10Min: Float! }
-type ZenyattaDeathsStats { deaths: Int! }
-type ZenyattaAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medals: Int!
-    card: Int! }
-type ZenyattaGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    gamesWon: Int!
-    winPercentage: Int! }
-type ZenyattaMiscStats { transcendenceHealing: Int!
-    defensiveAssists: Int!
-    defensiveAssistsMostInGame: Int!
-    healingDone: Int!
-    healingDoneMostInGame: Int!
+    meleeFinalBlowMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    healingDoneAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
+    multikillBest: Int!
+    meleeFinalBlowsMostInGame: Int! }
+type ZenyattaAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
+    meleeFinalBlowsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type ZenyattaAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type ZenyattaGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
     gamesLost: Int!
-    soloKillsAvgPer10Min: Int! }
+    winPercentage: Int!
+    gamesTied: Int! }
         type ZenyattaStats {
           
   hero: ZenyattaHeroStats
@@ -1220,10 +1286,8 @@ type ZenyattaMiscStats { transcendenceHealing: Int!
   assists: ZenyattaAssistsStats
   best: ZenyattaBestStats
   average: ZenyattaAverageStats
-  deaths: ZenyattaDeathsStats
   awards: ZenyattaAwardsStats
   game: ZenyattaGameStats
-  misc: ZenyattaMiscStats
         }
       
 
@@ -1233,24 +1297,41 @@ type ZenyattaMiscStats { transcendenceHealing: Int!
 type RoadhogHeroStats { enemiesHookedMostInGame: Int!
     enemiesHooked: Int!
     hooksAttempted: Int!
-    wholeHogKillMostInGame: Int!
-    wholeHogKill: Int!
+    wholeHogKillsMostInGame: Int!
+    wholeHogKills: Int!
     hookAccuracyBestInGame: Int!
-    meleeFinalBlowMostInGame: Int!
-    hookAccuracy: Int! }
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    wholeHogKillsAvgPer10Min: Int!
+    enemiesHookedAvgPer10Min: Int!
+    selfHealingAvgPer10Min: Int!
+    hookAccuracy: Int!
+    wholeHogKillMostInGame: Int!
+    wholeHogKill: Int! }
 type RoadhogCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
-    objectiveKill: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
     environmentalKill: Int!
-    meleeFinalBlow: Int!
+    meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Int!
-    weaponAccuracy: Int! }
+    weaponAccuracy: Int!
+    multikill: Int!
+    meleeFinalBlow: Int!
+    environmentalKills: Int! }
 type RoadhogAssistsStats { offensiveAssists: Int!
-    selfHealing: Int! }
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    turretsDestroyed: Int!
+    turretDestroyed: Int! }
 type RoadhogBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1258,32 +1339,21 @@ type RoadhogBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInGame: Int!
     eliminationsMostInGame: Int!
     finalBlowsMostInGame: Int!
-    objectiveKillMostInGame: Int!
+    objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
     soloKillsMostInGame: Int!
-    offensiveAssistsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type RoadhogAverageStats { allDamageDoneAvgPer10Min: Float! }
-type RoadhogDeathsStats { death: Int! }
-type RoadhogAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medals: Int! }
-type RoadhogGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    objectiveTime: String! }
-type RoadhogMiscStats { heroDamageDone: Int!
+    meleeFinalBlowsMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    wholeHogKillsAvgPer10Min: Int!
-    enemiesHookedAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
+    multikillBest: Int!
+    meleeFinalBlowMostInGame: Int! }
+type RoadhogAverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
@@ -1292,7 +1362,21 @@ type RoadhogMiscStats { heroDamageDone: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type RoadhogAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int!
+    card: Int! }
+type RoadhogGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+type RoadhogMiscStats { shieldGeneratorDestroyed: Int! }
         type RoadhogStats {
           
   hero: RoadhogHeroStats
@@ -1300,7 +1384,6 @@ type RoadhogMiscStats { heroDamageDone: Int!
   assists: RoadhogAssistsStats
   best: RoadhogBestStats
   average: RoadhogAverageStats
-  deaths: RoadhogDeathsStats
   awards: RoadhogAwardsStats
   game: RoadhogGameStats
   misc: RoadhogMiscStats
@@ -1312,15 +1395,32 @@ type RoadhogMiscStats { heroDamageDone: Int!
         
 type JunkratHeroStats { enemyTrappedMostInGame: Int!
     enemyTrapped: Int!
-    ripTireKillMostInGame: Int!
-    ripTireKill: Int! }
+    concussionMineKills: Int!
+    concussionMineKillsMostInGame: Int!
+    concussionMineKillsAvgPer10Min: Int!
+    enemiesTrappedAvgPer10Min: Int!
+    enemiesTrappedMostInGame: Int!
+    enemiesTrapped: Int!
+    ripTireKillsMostInGame: Int!
+    ripTireKills: Int!
+    ripTireKillsAvgPer10Min: Int! }
 type JunkratCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKill: Int!
     allDamageDone: Int!
+    objectiveKill: Int!
+    objectiveTime: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    weaponAccuracy: Int!
+    soloKills: Int!
     objectiveKills: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
+    timeSpentOnFire: String!
+    multikills: Int!
+    environmentalKill: Int!
+    meleeFinalBlow: Int! }
 type JunkratBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1328,30 +1428,18 @@ type JunkratBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInGame: Int!
     eliminationsMostInGame: Int!
     finalBlowsMostInGame: Int!
-    objectiveKillsMostInGame: Int!
+    objectiveKillMostInGame: Int!
     objectiveTimeMostInGame: String!
-    soloKillMostInGame: Int! }
-type JunkratAverageStats { allDamageDoneAvgPer10Min: Float! }
-type JunkratDeathsStats { deaths: Int! }
-type JunkratAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medals: Int! }
-type JunkratGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type JunkratMiscStats { timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
+    soloKillMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    ripTireKillsAvgPer10Min: Int!
-    enemiesTrappedAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
+    objectiveKillsMostInGame: Int!
+    soloKillsMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
+    multikillBest: Int!
+    meleeFinalBlowMostInGame: Int! }
+type JunkratAverageStats { barrierDamageDoneAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
@@ -1359,17 +1447,36 @@ type JunkratMiscStats { timeSpentOnFireMostInGame: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationPerLife: Int!
+    allDamageDoneAvgPer10Min: Float!
+    timeSpentOnFireAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    meleeFinalBlowsAvgPer10Min: Int! }
+type JunkratAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    card: Int!
+    cards: Int! }
+type JunkratGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesLost: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    winPercentage: Int! }
+type JunkratAssistsStats { turretsDestroyed: Int!
+    offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int! }
         type JunkratStats {
           
   hero: JunkratHeroStats
   combat: JunkratCombatStats
   best: JunkratBestStats
   average: JunkratAverageStats
-  deaths: JunkratDeathsStats
   awards: JunkratAwardsStats
   game: JunkratGameStats
-  misc: JunkratMiscStats
+  assists: JunkratAssistsStats
         }
       
 
@@ -1378,97 +1485,94 @@ type JunkratMiscStats { timeSpentOnFireMostInGame: Int!
         
 type ZaryaHeroStats { damageBlocked: Int!
     damageBlockedMostInGame: Int!
-    lifetimeEnergyAccumulation: Int!
-    energyMaximum: Int!
-    projectedBarriersApplied: Int!
-    averageEnergyBestInGame: Int!
-    averageEnergy: Float!
     gravitonSurgeKills: Int!
     gravitonSurgeKillsMostInGame: Int!
     highEnergyKillsMostInGame: Int!
     highEnergyKills: Int!
-    meleeFinalBlowsMostInGame: Int! }
-type ZaryaCombatStats { elimination: Int!
-    finalBlow: Int!
+    projectedBarriersApplied: Int!
+    averageEnergyBestInGame: Int!
+    projectedBarriersAppliedMostInGame: Int!
+    primaryFireAccuracy: Int!
+    projectedBarriersAppliedAvgPer10Min: Int!
+    highEnergyKillsAvgPer10Min: Int!
+    gravitonSurgeKillsAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int!
+    averageEnergy: Float! }
+type ZaryaCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
     soloKill: Int!
     allDamageDone: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int!
-    eliminations: Int!
-    finalBlows: Int!
-    soloKills: Int!
     objectiveKills: Int!
+    objectiveTime: String!
+    multikill: Int!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    weaponAccuracy: Int!
+    soloKills: Int!
     multikills: Int!
-    meleeFinalBlows: Int! }
-type ZaryaBestStats { eliminationMostInLife: Int!
+    environmentalKills: Int!
+    meleeFinalBlows: Int!
+    meleeFinalBlow: Int! }
+type ZaryaAssistsStats { offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int!
+    turretsDestroyed: Int! }
+type ZaryaBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
     killStreakBest: Int!
     allDamageDoneMostInGame: Int!
-    eliminationMostInGame: Int!
-    finalBlowMostInGame: Int!
-    soloKillMostInGame: Int!
-    eliminationsMostInLife: Int!
     eliminationsMostInGame: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
-    soloKillsMostInGame: Int!
-    offensiveAssistsMostInGame: Int! }
-type ZaryaAverageStats { allDamageDoneAvgPer10Min: Float! }
-type ZaryaDeathsStats { deaths: Int! }
-type ZaryaGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type ZaryaMiscStats { projectedBarriersAppliedMostInGame: Int!
-    heroDamageDone: Int!
+    multikillBest: Int!
+    soloKillMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    projectedBarriersAppliedAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
+    soloKillsMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type ZaryaAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int!
-    multikillBest: Int!
-    defensiveAssists: Int!
-    defensiveAssistsMostInGame: Int!
-    gamesTied: Int!
-    timeSpentOnFireMostInGame: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
-    highEnergyKillsAvgPer10Min: Int!
-    gravitonSurgeKillsAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
-    objectiveTimeAvgPer10Min: Int!
-    objectiveKillsAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
     meleeFinalBlowsAvgPer10Min: Int! }
-type ZaryaAssistsStats { turretsDestroyed: Int!
-    offensiveAssists: Int! }
 type ZaryaAwardsStats { medalsBronze: Int!
     medalsSilver: Int!
     medalsGold: Int!
     medals: Int!
     cards: Int! }
+type ZaryaGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int!
+    gamesTied: Int! }
         type ZaryaStats {
           
   hero: ZaryaHeroStats
   combat: ZaryaCombatStats
+  assists: ZaryaAssistsStats
   best: ZaryaBestStats
   average: ZaryaAverageStats
-  deaths: ZaryaDeathsStats
-  game: ZaryaGameStats
-  misc: ZaryaMiscStats
-  assists: ZaryaAssistsStats
   awards: ZaryaAwardsStats
+  game: ZaryaGameStats
         }
       
 
@@ -1481,20 +1585,36 @@ type Soldier76HeroStats { helixRocketsKillsMostInGame: Int!
     tacticalVisorKillsMostInGame: Int!
     bioticFieldsDeployed: Int!
     bioticFieldHealingDone: Int!
-    meleeFinalBlowMostInGame: Int! }
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    tacticalVisorKillsAvgPer10Min: Int!
+    helixRocketsKillsAvgPer10Min: Int!
+    selfHealingAvgPer10Min: Int! }
 type Soldier76CombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
     multikills: Int!
     meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     criticalHits: Int!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
     criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type Soldier76AssistsStats { selfHealing: Int!
-    turretDestroyed: Int! }
+    weaponAccuracy: Int!
+    elimination: Int!
+    finalBlow: Int! }
+type Soldier76AssistsStats { defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int!
+    turretsDestroyed: Int! }
 type Soldier76BestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1504,42 +1624,19 @@ type Soldier76BestStats { eliminationsMostInLife: Int!
     finalBlowsMostInGame: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
+    multikillBest: Int!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
     criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int!
-    soloKillMostInGame: Int! }
-type Soldier76AverageStats { allDamageDoneAvgPer10Min: Float! }
-type Soldier76DeathsStats { deaths: Int! }
-type Soldier76AwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int!
-    card: Int! }
-type Soldier76GameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type Soldier76MiscStats { multikillBest: Int!
-    defensiveAssists: Int!
-    defensiveAssistsMostInGame: Int!
-    healingDone: Int!
-    healingDoneMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    tacticalVisorKillsAvgPer10Min: Int!
-    helixRocketsKillsAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    healingDoneAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
+    eliminationMostInLife: Int!
+    eliminationMostInGame: Int!
+    finalBlowMostInGame: Int! }
+type Soldier76AverageStats { barrierDamageDoneAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
@@ -1550,7 +1647,19 @@ type Soldier76MiscStats { multikillBest: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type Soldier76AwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type Soldier76GameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type Soldier76Stats {
           
   hero: Soldier76HeroStats
@@ -1558,106 +1667,129 @@ type Soldier76MiscStats { multikillBest: Int!
   assists: Soldier76AssistsStats
   best: Soldier76BestStats
   average: Soldier76AverageStats
-  deaths: Soldier76DeathsStats
   awards: Soldier76AwardsStats
   game: Soldier76GameStats
-  misc: Soldier76MiscStats
         }
       
 
         # == lucio types ==
 
         
-type LucioCombatStats { eliminations: Int!
-    finalBlow: Int!
-    allDamageDone: Int!
-    objectiveKills: Int!
-    criticalHits: Int!
-    criticalHitAccuracy: Int!
-    eliminationPerLife: Int!
-    weaponAccuracy: Int! }
-type LucioAssistsStats { offensiveAssist: Int!
-    selfHealing: Int! }
-type LucioBestStats { eliminationsMostInLife: Int!
-    allDamageDoneMostInLife: Int!
-    weaponAccuracyBestInGame: Int!
-    killStreakBest: Int!
-    allDamageDoneMostInGame: Int!
-    eliminationsMostInGame: Int!
-    finalBlowMostInGame: Int!
-    objectiveKillsMostInGame: Int!
-    objectiveTimeMostInGame: String!
-    offensiveAssistMostInGame: Int!
-    criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int!
-    selfHealingMostInGame: Int! }
-type LucioAverageStats { allDamageDoneAvgPer10Min: Float! }
-type LucioDeathsStats { deaths: Int! }
-type LucioAwardsStats { medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type LucioGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    winPercentage: Int! }
-type LucioMiscStats { defensiveAssist: Int!
-    defensiveAssistMostInGame: Int!
-    healingDone: Int!
-    healingDoneMostInGame: Int!
+type LucioCombatStats { allDamageDone: Int!
     heroDamageDone: Int!
+    eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    timeSpentOnFire: String!
+    criticalHits: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
+    soloKill: Int!
+    environmentalKills: Int!
+    meleeFinalBlow: Int! }
+type LucioBestStats { allDamageDoneMostInLife: Int!
+    allDamageDoneMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
+    eliminationsMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    criticalHitsMostInGame: Int!
+    criticalHitsMostInLife: Int!
+    timeSpentOnFireMostInGame: Int!
     barrierDamageDoneMostInGame: Int!
+    soloKillMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type LucioAverageStats { heroDamageDoneAvgPer10Min: Int!
+    allDamageDoneAvgPer10Min: Float!
     barrierDamageDoneAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    healingDoneAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
     criticalHitsAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
     objectiveKillsAvgPer10Min: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationPerLife: Int!
+    soloKillsAvgPer10Min: Int!
+    meleeFinalBlowsAvgPer10Min: Int!
+    eliminationsPerLife: Float! }
+type LucioAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medals: Int!
+    medalsGold: Int! }
+type LucioGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    gamesWon: Int!
+    winPercentage: Int! }
+type LucioHeroStats { soundBarriersProvided: Int!
+    soundBarriersProvidedMostInGame: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int!
+    soundBarriersProvidedAvgPer10Min: Int! }
+type LucioAssistsStats { offensiveAssists: Int!
+    offensiveAssistMostInGame: Int!
+    defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int!
+    offensiveAssistsMostInGame: Int! }
         type LucioStats {
           
   combat: LucioCombatStats
-  assists: LucioAssistsStats
   best: LucioBestStats
   average: LucioAverageStats
-  deaths: LucioDeathsStats
   awards: LucioAwardsStats
   game: LucioGameStats
-  misc: LucioMiscStats
+  hero: LucioHeroStats
+  assists: LucioAssistsStats
         }
       
 
         # == dva types ==
 
         
-type DvaHeroStats { mechsCalled: Int!
+type DvaHeroStats { selfDestructKills: Int!
+    selfDestructKillsMostInGame: Int!
+    mechsCalled: Int!
     mechsCalledMostInGame: Int!
     damageBlockedMostInGame: Int!
     damageBlocked: Int!
     mechDeaths: Int!
-    meleeFinalBlowsMostInGame: Int! }
+    selfDestructKillsAvgPer10Min: Int!
+    mechsCalledAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int! }
 type DvaCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKills: Int!
     allDamageDone: Int!
     objectiveKills: Int!
+    objectiveTime: String!
+    meleeFinalBlows: Int!
+    timeSpentOnFire: String!
+    criticalHits: Int!
+    heroDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
     multikills: Int!
     environmentalKills: Int!
-    meleeFinalBlows: Int!
-    criticalHits: Int!
-    criticalHitAccuracy: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
-type DvaAssistsStats { turretsDestroyed: Int! }
+    barrierDamageDone: Int! }
 type DvaBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1669,32 +1801,14 @@ type DvaBestStats { eliminationsMostInLife: Int!
     objectiveTimeMostInGame: String!
     soloKillsMostInGame: Int!
     criticalHitsMostInGame: Int!
-    criticalHitsMostInLife: Int! }
-type DvaAverageStats { allDamageDoneAvgPer10Min: Float! }
-type DvaDeathsStats { deaths: Int! }
-type DvaAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int!
-    cards: Int! }
-type DvaGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type DvaMiscStats { selfDestructKills: Int!
-    selfDestructKillsMostInGame: Int!
-    multikillBest: Int!
-    gamesTied: Int!
+    criticalHitsMostInLife: Int!
+    meleeFinalBlowsMostInGame: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
-    barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    criticalHitsAvgPer10Min: Int!
+    multikillBest: Int!
+    barrierDamageDoneMostInGame: Int! }
+type DvaAverageStats { criticalHitsAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
@@ -1703,21 +1817,34 @@ type DvaMiscStats { selfDestructKills: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    selfDestructKillsAvgPer10Min: Int!
-    mechsCalledAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    barrierDamageDoneAvgPer10Min: Int! }
+type DvaAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type DvaGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesLost: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    winPercentage: Int! }
+type DvaAssistsStats { teleporterPadsDestroyed: Int!
+    turretsDestroyed: Int!
+    teleporterPadDestroyed: Int! }
+type DvaMiscStats { shieldGeneratorDestroyed: Int! }
         type DvaStats {
           
   hero: DvaHeroStats
   combat: DvaCombatStats
-  assists: DvaAssistsStats
   best: DvaBestStats
   average: DvaAverageStats
-  deaths: DvaDeathsStats
   awards: DvaAwardsStats
   game: DvaGameStats
+  assists: DvaAssistsStats
   misc: DvaMiscStats
         }
       
@@ -1725,46 +1852,85 @@ type DvaMiscStats { selfDestructKills: Int!
         # == mei types ==
 
         
-type MeiHeroStats { damageBlockedMostInGame: Int!
-    damageBlocked: Int! }
-type MeiCombatStats { allDamageDone: Int!
-    weaponAccuracy: Int! }
-type MeiAssistsStats { selfHealing: Int! }
-type MeiBestStats { allDamageDoneMostInLife: Int!
-    weaponAccuracyBestInGame: Int!
-    allDamageDoneMostInGame: Int!
-    selfHealingMostInGame: Int! }
-type MeiAverageStats { allDamageDoneAvgPer10Min: Float! }
-type MeiDeathsStats { death: Int! }
-type MeiAwardsStats { medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type MeiGameStats { timePlayed: Float!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type MeiMiscStats { timeSpentOnFireMostInGame: Int!
+type MeiHeroStats { enemiesFrozen: Int!
+    enemiesFrozenMostInGame: Int!
+    damageBlockedMostInGame: Int!
+    damageBlocked: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int!
+    enemiesFrozenAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int!
+    blizzardKillsMostInGame: Int!
+    blizzardKills: Int!
+    blizzardKillsAvgPer10Min: Int! }
+type MeiCombatStats { eliminations: Int!
+    deaths: Int!
+    allDamageDone: Int!
+    objectiveKill: Int!
+    objectiveTime: String!
+    criticalHits: Int!
     heroDamageDone: Int!
+    barrierDamageDone: Int!
+    criticalHitAccuracy: Int!
+    weaponAccuracy: Int!
+    finalBlows: Int!
+    soloKill: Int!
+    objectiveKills: Int!
+    multikill: Int!
+    timeSpentOnFire: String! }
+type MeiBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    objectiveKillMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    criticalHitsMostInGame: Int!
+    criticalHitsMostInLife: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    selfHealingAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
-    timeSpentOnFireAvgPer10Min: Int!
+    barrierDamageDoneMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    multikillBest: Int!
+    soloKillMostInGame: Int!
+    timeSpentOnFireMostInGame: Int! }
+type MeiAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    criticalHitsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int! }
+type MeiAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int! }
+type MeiGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+type MeiAssistsStats { offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int! }
         type MeiStats {
           
   hero: MeiHeroStats
   combat: MeiCombatStats
-  assists: MeiAssistsStats
   best: MeiBestStats
   average: MeiAverageStats
-  deaths: MeiDeathsStats
   awards: MeiAwardsStats
   game: MeiGameStats
-  misc: MeiMiscStats
+  assists: MeiAssistsStats
         }
       
 
@@ -1772,21 +1938,50 @@ type MeiMiscStats { timeSpentOnFireMostInGame: Int!
 
         
 type AnaHeroStats { scopedAccuracyBestInGame: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    enemiesSlept: Int!
     nanoBoostsApplied: Int!
     nanoBoostAssists: Int!
+    unscopedAccuracyBestInGame: Int!
+    enemiesSleptMostInGame: Int!
     nanoBoostAssistsMostInGame: Int!
+    nanoBoostsAppliedMostInGame: Int!
+    bioticGrenadeKills: Int!
+    selfHealingAvgPer10Min: Int!
+    nanoBoostsAppliedAvgPer10Min: Int!
+    nanoBoostAssistsAvgPer10Min: Int!
+    enemiesSleptAvgPer10Min: Int!
     unscopedAccuracy: Int!
     scopedAccuracy: Int! }
 type AnaCombatStats { eliminations: Int!
+    deaths: Int!
     finalBlows: Int!
     soloKill: Int!
     allDamageDone: Int!
     objectiveKills: Int!
-    environmentalKill: Int!
-    eliminationsPerLife: Float!
-    weaponAccuracy: Int! }
+    objectiveTime: String!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    weaponAccuracy: Int!
+    soloKills: Int!
+    meleeFinalBlow: Int!
+    finalBlow: Int!
+    objectiveKill: Int!
+    meleeFinalBlows: Int!
+    multikill: Int! }
 type AnaAssistsStats { offensiveAssists: Int!
-    selfHealing: Int! }
+    offensiveAssistsMostInGame: Int!
+    defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int!
+    turretDestroyed: Int! }
 type AnaBestStats { eliminationsMostInLife: Int!
     allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
@@ -1797,40 +1992,17 @@ type AnaBestStats { eliminationsMostInLife: Int!
     objectiveKillsMostInGame: Int!
     objectiveTimeMostInGame: String!
     soloKillMostInGame: Int!
-    offensiveAssistsMostInGame: Int!
-    selfHealingMostInGame: Int! }
-type AnaAverageStats { allDamageDoneAvgPer10Min: Float! }
-type AnaDeathsStats { deaths: Int! }
-type AnaAwardsStats { medalsBronze: Int!
-    medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type AnaGameStats { timePlayed: Int!
-    gamesPlayed: Int!
-    gamesWon: Int!
-    objectiveTime: String!
-    timeSpentOnFire: String!
-    winPercentage: Int! }
-type AnaMiscStats { defensiveAssists: Int!
-    defensiveAssistsMostInGame: Int!
-    healingDone: Int!
-    healingDoneMostInGame: Int!
-    enemiesSlept: Int!
-    unscopedAccuracyBestInGame: Int!
-    enemiesSleptMostInGame: Int!
-    nanoBoostsAppliedMostInGame: Int!
-    bioticGrenadeKills: Int!
     timeSpentOnFireMostInGame: Int!
-    heroDamageDone: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    selfHealingAvgPer10Min: Int!
-    offensiveAssistsAvgPer10Min: Int!
-    healingDoneAvgPer10Min: Int!
-    defensiveAssistsAvgPer10Min: Int!
+    soloKillsMostInGame: Int!
+    meleeFinalBlowMostInGame: Int!
+    finalBlowMostInGame: Int!
+    objectiveKillMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int!
+    multikillBest: Int! }
+type AnaAverageStats { barrierDamageDoneAvgPer10Min: Int!
     timeSpentOnFireAvgPer10Min: Int!
     soloKillsAvgPer10Min: Int!
     objectiveTimeAvgPer10Min: Int!
@@ -1838,11 +2010,20 @@ type AnaMiscStats { defensiveAssists: Int!
     finalBlowsAvgPer10Min: Int!
     eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
-    nanoBoostsAppliedAvgPer10Min: Int!
-    nanoBoostAssistsAvgPer10Min: Int!
-    enemiesSleptAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    meleeFinalBlowsAvgPer10Min: Int! }
+type AnaAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type AnaGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type AnaStats {
           
   hero: AnaHeroStats
@@ -1850,92 +2031,336 @@ type AnaMiscStats { defensiveAssists: Int!
   assists: AnaAssistsStats
   best: AnaBestStats
   average: AnaAverageStats
-  deaths: AnaDeathsStats
   awards: AnaAwardsStats
   game: AnaGameStats
-  misc: AnaMiscStats
         }
       
 
         # == orisa types ==
 
         
-type OrisaCombatStats { allDamageDone: Int!
-    weaponAccuracy: Int! }
-type OrisaBestStats { allDamageDoneMostInLife: Int!
-    weaponAccuracyBestInGame: Int!
-    allDamageDoneMostInGame: Int! }
-type OrisaAverageStats { allDamageDoneAvgPer10Min: Float! }
-type OrisaDeathsStats { death: Int! }
-type OrisaAwardsStats { medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type OrisaGameStats { timePlayed: Float!
-    gamesPlayed: Int! }
-type OrisaMiscStats { damageBlocked: Int!
+type OrisaHeroStats { damageAmplified: Int!
+    damageAmplifiedMostInGame: Int!
+    damageBlocked: Int!
     damageBlockedMostInGame: Int!
+    superchargerAssists: Int!
+    superchargerAssistsMostInGame: Int!
+    superchargerAssistsAvgPer10Min: Int!
+    damageBlockedAvgPer10Min: Int!
+    damageAmplifiedAvgPer10Min: Int! }
+type OrisaCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    soloKills: Int!
+    allDamageDone: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    multikills: Int!
+    environmentalKills: Int!
+    meleeFinalBlows: Int!
+    timeSpentOnFire: String!
     heroDamageDone: Int!
+    barrierDamageDone: Int!
+    quickMeleeAccuracy: Int!
+    weaponAccuracy: Int!
+    finalBlow: Int!
+    objectiveKill: Int! }
+type OrisaAssistsStats { turretsDestroyed: Int!
+    offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int! }
+type OrisaBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    multikillBest: Int!
+    soloKillsMostInGame: Int!
+    meleeFinalBlowsMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
-    damageBlockedAvgPer10Min: Int!
+    eliminationMostInLife: Int!
+    eliminationMostInGame: Int!
+    finalBlowMostInGame: Int!
+    objectiveKillMostInGame: Int!
+    soloKillMostInGame: Int! }
+type OrisaAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    meleeFinalBlowsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    eliminationPerLife: Int! }
+type OrisaAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    cards: Int! }
+type OrisaGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type OrisaStats {
           
+  hero: OrisaHeroStats
   combat: OrisaCombatStats
+  assists: OrisaAssistsStats
   best: OrisaBestStats
   average: OrisaAverageStats
-  deaths: OrisaDeathsStats
   awards: OrisaAwardsStats
   game: OrisaGameStats
-  misc: OrisaMiscStats
+        }
+      
+
+        # == sombra types ==
+
+        
+type SombraAwardsStats { medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    medalsBronze: Int! }
+type SombraGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesLost: Int!
+    gamesWon: Int!
+    winPercentage: Int! }
+type SombraHeroStats { enemiesHacked: Int!
+    enemiesEmPd: Int!
+    enemiesHackedMostInGame: Int!
+    enemiesEmPdMostInGame: Int!
+    enemiesHackedAvgPer10Min: Int!
+    enemiesEmPdAvgPer10Min: Int! }
+type SombraCombatStats { eliminations: Int!
+    death: Int!
+    finalBlows: Int!
+    allDamageDone: Int!
+    objectiveKill: Int!
+    objectiveTime: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    weaponAccuracy: Int!
+    deaths: Int!
+    soloKills: Int!
+    objectiveKills: Int!
+    meleeFinalBlow: Int!
+    timeSpentOnFire: String!
+    quickMeleeAccuracy: Int! }
+type SombraAssistsStats { turretsDestroyed: Int!
+    offensiveAssists: Int!
+    offensiveAssistsMostInGame: Int!
+    offensiveAssistsAvgPer10Min: Int! }
+type SombraBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    weaponAccuracyBestInGame: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int!
+    barrierDamageDoneMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    soloKillsMostInGame: Int!
+    meleeFinalBlowMostInGame: Int!
+    timeSpentOnFireMostInGame: Int! }
+type SombraAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    meleeFinalBlowsAvgPer10Min: Int! }
+        type SombraStats {
+          
+  awards: SombraAwardsStats
+  game: SombraGameStats
+  hero: SombraHeroStats
+  combat: SombraCombatStats
+  assists: SombraAssistsStats
+  best: SombraBestStats
+  average: SombraAverageStats
         }
       
 
         # == doomfist types ==
 
         
-type DoomfistHeroStats { abilityDamageDone: Int!
-    abilityDamageDoneMostInGame: Int!
+type DoomfistHeroStats { abilityDamageDone: Float!
+    abilityDamageDoneMostInGame: Float!
+    meteorStrikeKill: Int!
+    meteorStrikeKillMostInGame: Int!
     shieldsCreated: Int!
     shieldsCreatedMostInGame: Int!
     shieldsCreatedAvgPer10Min: Int!
-    abilityDamageDoneAvgPer10Min: Int! }
-type DoomfistCombatStats { allDamageDone: Int!
-    weaponAccuracy: Int! }
-type DoomfistBestStats { allDamageDoneMostInLife: Int!
+    meteorStrikeKillsAvgPer10Min: Int!
+    abilityDamageDoneAvgPer10Min: Int!
+    meteorStrikeKills: Int!
+    meteorStrikeKillsMostInGame: Int! }
+type DoomfistCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    soloKills: Int!
+    allDamageDone: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    environmentalKill: Int!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    multikill: Int!
+    quickMeleeAccuracy: Int!
+    weaponAccuracy: Int!
+    objectiveKill: Int! }
+type DoomfistBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
     weaponAccuracyBestInGame: Int!
-    allDamageDoneMostInGame: Int! }
-type DoomfistAverageStats { allDamageDoneAvgPer10Min: Float! }
-type DoomfistDeathsStats { death: Int! }
-type DoomfistAwardsStats { medalsSilver: Int!
-    medalsGold: Int!
-    medals: Int! }
-type DoomfistGameStats { timePlayed: Float!
-    gamesPlayed: Int! }
-type DoomfistMiscStats { heroDamageDone: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    soloKillMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
     heroDamageDoneMostInGame: Int!
     heroDamageDoneMostInLife: Int!
-    barrierDamageDone: Int!
     barrierDamageDoneMostInGame: Int!
-    barrierDamageDoneAvgPer10Min: Int!
+    multikillBest: Int!
+    objectiveKillMostInGame: Int!
+    soloKillsMostInGame: Int! }
+type DoomfistAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
     deathsAvgPer10Min: Int!
     heroDamageDoneAvgPer10Min: Int!
-    gamesLost: Int! }
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float! }
+type DoomfistAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int! }
+type DoomfistGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
         type DoomfistStats {
           
   hero: DoomfistHeroStats
   combat: DoomfistCombatStats
   best: DoomfistBestStats
   average: DoomfistAverageStats
-  deaths: DoomfistDeathsStats
   awards: DoomfistAwardsStats
   game: DoomfistGameStats
-  misc: DoomfistMiscStats
+        }
+      
+
+        # == moira types ==
+
+        
+type MoiraHeroStats { coalescenceKills: Int!
+    coalescenceKillsMostInGame: Int!
+    coalescenceHealing: Int!
+    coalescenceHealingMostInGame: Int!
+    secondaryFireAccuracy: Int!
+    coalescenceHealingAvgPer10Min: Int!
+    coalescenceKillsAvgPer10Min: Int!
+    selfHealing: Int!
+    selfHealingMostInGame: Int!
+    selfHealingAvgPer10Min: Int! }
+type MoiraCombatStats { eliminations: Int!
+    deaths: Int!
+    finalBlows: Int!
+    soloKills: Int!
+    allDamageDone: Int!
+    objectiveKills: Int!
+    objectiveTime: String!
+    multikill: Int!
+    timeSpentOnFire: String!
+    heroDamageDone: Int!
+    barrierDamageDone: Int!
+    multikills: Int!
+    meleeFinalBlow: Int!
+    quickMeleeAccuracy: Int! }
+type MoiraAssistsStats { defensiveAssists: Int!
+    defensiveAssistsMostInGame: Int!
+    healingDone: Int!
+    healingDoneMostInGame: Int!
+    healingDoneAvgPer10Min: Int!
+    defensiveAssistsAvgPer10Min: Int! }
+type MoiraBestStats { eliminationsMostInLife: Int!
+    allDamageDoneMostInLife: Int!
+    killStreakBest: Int!
+    allDamageDoneMostInGame: Int!
+    eliminationsMostInGame: Int!
+    finalBlowsMostInGame: Int!
+    objectiveKillsMostInGame: Int!
+    objectiveTimeMostInGame: String!
+    multikillBest: Int!
+    soloKillMostInGame: Int!
+    timeSpentOnFireMostInGame: Int!
+    heroDamageDoneMostInGame: Int!
+    heroDamageDoneMostInLife: Int!
+    barrierDamageDoneMostInGame: Int!
+    meleeFinalBlowMostInGame: Int! }
+type MoiraAverageStats { barrierDamageDoneAvgPer10Min: Int!
+    timeSpentOnFireAvgPer10Min: Int!
+    soloKillsAvgPer10Min: Int!
+    objectiveTimeAvgPer10Min: Int!
+    objectiveKillsAvgPer10Min: Int!
+    finalBlowsAvgPer10Min: Int!
+    eliminationsAvgPer10Min: Int!
+    deathsAvgPer10Min: Int!
+    heroDamageDoneAvgPer10Min: Int!
+    eliminationsPerLife: Float!
+    allDamageDoneAvgPer10Min: Float!
+    meleeFinalBlowsAvgPer10Min: Int! }
+type MoiraAwardsStats { medalsBronze: Int!
+    medalsSilver: Int!
+    medalsGold: Int!
+    medals: Int!
+    card: Int!
+    cards: Int! }
+type MoiraGameStats { timePlayed: Int!
+    gamesPlayed: Int!
+    gamesWon: Int!
+    gamesTied: Int!
+    gamesLost: Int!
+    winPercentage: Int! }
+        type MoiraStats {
+          
+  hero: MoiraHeroStats
+  combat: MoiraCombatStats
+  assists: MoiraAssistsStats
+  best: MoiraBestStats
+  average: MoiraAverageStats
+  awards: MoiraAwardsStats
+  game: MoiraGameStats
         }
       
   
